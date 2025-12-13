@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
@@ -10,6 +11,21 @@ import Recruiters from './components/home/Recruiters'
 import NewsEvents from './components/home/NewsEvents'
 import Stats from './components/home/Stats'
 import ContactSection from './components/home/ContactSection'
+import DepartmentDetail from './components/DepartmentDetail'
+
+function HomePage() {
+    return (
+        <main>
+            <HeroSection />
+            <Stats />
+            <WhyKVSR />
+            <CoursesOffered />
+            <Recruiters />
+            <NewsEvents />
+            <ContactSection />
+        </main>
+    )
+}
 
 function App() {
     const [isLoading, setIsLoading] = useState(true)
@@ -31,31 +47,28 @@ function App() {
     }, [])
 
     return (
-        <div className="min-h-screen bg-[var(--color-background)]">
-            <AnimatePresence mode="wait">
-                {isLoading && (
-                    <PageLoader key="loader" imagesLoaded={imagesLoaded} />
-                )}
-            </AnimatePresence>
+        <Router>
+            <div className="min-h-screen bg-[var(--color-background)]">
+                <AnimatePresence mode="wait">
+                    {isLoading && (
+                        <PageLoader key="loader" imagesLoaded={imagesLoaded} />
+                    )}
+                </AnimatePresence>
 
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isLoading ? 0 : 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <Header />
-                <main>
-                    <HeroSection />
-                    <Stats />
-                    <WhyKVSR />
-                    <CoursesOffered />
-                    <Recruiters />
-                    <NewsEvents />
-                    <ContactSection />
-                </main>
-                <Footer />
-            </motion.div>
-        </div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isLoading ? 0 : 1 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/department/:code" element={<DepartmentDetail />} />
+                    </Routes>
+                    <Footer />
+                </motion.div>
+            </div>
+        </Router>
     )
 }
 

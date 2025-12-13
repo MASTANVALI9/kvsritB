@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVSRIT Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            border: none;
+            background: white;
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .data-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .color-preview {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 KVSRIT Admin Panel</h1>
+            <p class="subtitle">Manage your college website content</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('news')">📰 News & Events</button>
+            <button class="tab-button" onclick="switchTab('courses')">📚 Courses</button>
+            <button class="tab-button" onclick="switchTab('recruiters')">🏢 Recruiters</button>
+            <button class="tab-button" onclick="switchTab('stats')">📊 Statistics</button>
+            <button class="tab-button" onclick="switchTab('contacts')">📧 Contact Submissions</button>
+        </div>
+
+        <!-- News Tab -->
+        <div id="news-tab" class="tab-content active">
+            <h2>Manage News & Events</h2>
+            <div id="news-message"></div>
+            
+            <form id="news-form" onsubmit="submitNews(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select id="news-category" required>
+                            <option value="news">News & Events</option>
+                            <option value="exams">Examinations</option>
+                            <option value="placements">Placements</option>
+                            <option value="circulars">Circulars</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date *</label>
+                        <input type="text" id="news-date" placeholder="e.g., 25-03-2025" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" id="news-title" placeholder="Enter news title" required>
+                </div>
+                <div class="form-group">
+                    <label>Link</label>
+                    <input type="text" id="news-link" placeholder="Enter link (optional)">
+                </div>
+                <input type="hidden" id="news-id">
+                <button type="submit" class="btn btn-primary">Add News</button>
+                <button type="button" class="btn btn-secondary" onclick="resetNewsForm()">Clear</button>
+            </form>
+
+            <div id="news-list" class="loading">Loading news...</div>
+        </div>
+
+        <!-- Courses Tab -->
+        <div id="courses-tab" class="tab-content">
+            <h2>Manage Courses</h2>
+            <div id="courses-message"></div>
+            
+            <form id="courses-form" onsubmit="submitCourse(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Type *</label>
+                        <select id="course-type" required>
+                            <option value="ug">Undergraduate (UG)</option>
+                            <option value="pg">Postgraduate (PG)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Short Name *</label>
+                        <input type="text" id="course-name" placeholder="e.g., CSE" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="course-fullname" placeholder="e.g., Computer Science & Engineering" required>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Icon Name *</label>
+                        <input type="text" id="course-icon" placeholder="e.g., Monitor, Brain, Cpu" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Color *</label>
+                        <input type="color" id="course-color" required>
+                        <span class="color-preview" id="color-preview"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="course-description" placeholder="Enter course description (optional)"></textarea>
+                </div>
+                <input type="hidden" id="course-id">
+                <button type="submit" class="btn btn-primary">Add Course</button>
+                <button type="button" class="btn btn-secondary" onclick="resetCourseForm()">Clear</button>
+            </form>
+
+            <div id="courses-list" class="loading">Loading courses...</div>
+        </div>
+
+        <!-- Recruiters Tab -->
+        <div id="recruiters-tab" class="tab-content">
+            <h2>Manage Recruiters</h2>
+            <div id="recruiters-message"></div>
+            
+            <form id="recruiters-form" onsubmit="submitRecruiter(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Company Name *</label>
+                        <input type="text" id="recruiter-name" placeholder="e.g., TCS" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" id="recruiter-order" placeholder="0" value="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Logo URL *</label>
+                    <input type="url" id="recruiter-logo" placeholder="https://example.com/logo.png" required>
+                </div>
+                <input type="hidden" id="recruiter-id">
+                <button type="submit" class="btn btn-primary">Add Recruiter</button>
+                <button type="button" class="btn btn-secondary" onclick="resetRecruiterForm()">Clear</button>
+            </form>
+
+            <div id="recruiters-list" class="loading">Loading recruiters...</div>
+        </div>
+
+        <!-- Stats Tab -->
+        <div id="stats-tab" class="tab-content">
+            <h2>Manage Statistics</h2>
+            <div id="stats-message"></div>
+            
+            <form id="stats-form" onsubmit="submitStat(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Label *</label>
+                        <input type="text" id="stat-label" placeholder="e.g., Placement Rate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Value *</label>
+                        <input type="text" id="stat-value" placeholder="e.g., 95%" required>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Icon Name</label>
+                        <input type="text" id="stat-icon" placeholder="e.g., TrendingUp, Award">
+                    </div>
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" id="stat-order" placeholder="0" value="0">
+                    </div>
+                </div>
+                <input type="hidden" id="stat-id">
+                <button type="submit" class="btn btn-primary">Add Statistic</button>
+                <button type="button" class="btn btn-secondary" onclick="resetStatForm()">Clear</button>
+            </form>
+
+            <div id="stats-list" class="loading">Loading statistics...</div>
+        </div>
+
+        <!-- Contacts Tab -->
+        <div id="contacts-tab" class="tab-content">
+            <h2>Contact Form Submissions</h2>
+            <div id="contacts-message"></div>
+            <div id="contacts-list" class="loading">Loading contacts...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Load data when switching tabs
+            if (tabName === 'news') loadNews();
+            if (tabName === 'courses') loadCourses();
+            if (tabName === 'recruiters') loadRecruiters();
+            if (tabName === 'stats') loadStats();
+            if (tabName === 'contacts') loadContacts();
+        }
+
+        // Show message
+        function showMessage(elementId, message, type = 'success') {
+            const msgEl = document.getElementById(elementId);
+            msgEl.innerHTML = `<div class="message ${type}">${message}</div>`;
+            setTimeout(() => msgEl.innerHTML = '', 5000);
+        }
+
+        // ===== NEWS FUNCTIONS =====
+        async function loadNews() {
+            try {
+                const response = await fetch(`${API_URL}/news`);
+                const news = await response.json();
+                
+                let html = '<table class="data-table"><thead><tr><th>Category</th><th>Date</th><th>Title</th><th>Actions</th></tr></thead><tbody>';
+                news.forEach(item => {
+                    html += `<tr>
+                        <td><strong>${item.category.toUpperCase()}</strong></td>
+                        <td>${item.date}</td>
+                        <td>${item.title}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-secondary" onclick='editNews(${JSON.stringify(item)})'>Edit</button>
+                            <button class="btn btn-danger" onclick="deleteNews('${item._id}')">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('news-list').innerHTML = html;
+            } catch (error) {
+                document.getElementById('news-list').innerHTML = '<p class="message error">Error loading news</p>';
+            }
+        }
+
+        async function submitNews(e) {
+            e.preventDefault();
+            const id = document.getElementById('news-id').value;
+            const data = {
+                category: document.getElementById('news-category').value,
+                date: document.getElementById('news-date').value,
+                title: document.getElementById('news-title').value,
+                link: document.getElementById('news-link').value || '#'
+            };
+
+            try {
+                const url = id ? `${API_URL}/news/${id}` : `${API_URL}/news`;
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showMessage('news-message', id ? 'News updated successfully!' : 'News added successfully!');
+                    resetNewsForm();
+                    loadNews();
+                }
+            } catch (error) {
+                showMessage('news-message', 'Error saving news', 'error');
+            }
+        }
+
+        function editNews(item) {
+            document.getElementById('news-id').value = item._id;
+            document.getElementById('news-category').value = item.category;
+            document.getElementById('news-date').value = item.date;
+            document.getElementById('news-title').value = item.title;
+            document.getElementById('news-link').value = item.link;
+            window.scrollTo(0, 0);
+        }
+
+        async function deleteNews(id) {
+            if (!confirm('Are you sure you want to delete this news item?')) return;
+            
+            try {
+                await fetch(`${API_URL}/news/${id}`, { method: 'DELETE' });
+                showMessage('news-message', 'News deleted successfully!');
+                loadNews();
+            } catch (error) {
+                showMessage('news-message', 'Error deleting news', 'error');
+            }
+        }
+
+        function resetNewsForm() {
+            document.getElementById('news-form').reset();
+            document.getElementById('news-id').value = '';
+        }
+
+        // ===== COURSES FUNCTIONS =====
+        async function loadCourses() {
+            try {
+                const response = await fetch(`${API_URL}/courses`);
+                const courses = await response.json();
+                
+                let html = '<table class="data-table"><thead><tr><th>Type</th><th>Name</th><th>Full Name</th><th>Color</th><th>Actions</th></tr></thead><tbody>';
+                courses.forEach(item => {
+                    html += `<tr>
+                        <td><strong>${item.type.toUpperCase()}</strong></td>
+                        <td>${item.name}</td>
+                        <td>${item.fullName}</td>
+                        <td><span class="color-preview" style="background: ${item.color}"></span> ${item.color}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-secondary" onclick='editCourse(${JSON.stringify(item)})'>Edit</button>
+                            <button class="btn btn-danger" onclick="deleteCourse('${item._id}')">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('courses-list').innerHTML = html;
+            } catch (error) {
+                document.getElementById('courses-list').innerHTML = '<p class="message error">Error loading courses</p>';
+            }
+        }
+
+        async function submitCourse(e) {
+            e.preventDefault();
+            const id = document.getElementById('course-id').value;
+            const data = {
+                type: document.getElementById('course-type').value,
+                name: document.getElementById('course-name').value,
+                fullName: document.getElementById('course-fullname').value,
+                icon: document.getElementById('course-icon').value,
+                color: document.getElementById('course-color').value,
+                description: document.getElementById('course-description').value
+            };
+
+            try {
+                const url = id ? `${API_URL}/courses/${id}` : `${API_URL}/courses`;
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showMessage('courses-message', id ? 'Course updated successfully!' : 'Course added successfully!');
+                    resetCourseForm();
+                    loadCourses();
+                }
+            } catch (error) {
+                showMessage('courses-message', 'Error saving course', 'error');
+            }
+        }
+
+        function editCourse(item) {
+            document.getElementById('course-id').value = item._id;
+            document.getElementById('course-type').value = item.type;
+            document.getElementById('course-name').value = item.name;
+            document.getElementById('course-fullname').value = item.fullName;
+            document.getElementById('course-icon').value = item.icon;
+            document.getElementById('course-color').value = item.color;
+            document.getElementById('course-description').value = item.description || '';
+            window.scrollTo(0, 0);
+        }
+
+        async function deleteCourse(id) {
+            if (!confirm('Are you sure you want to delete this course?')) return;
+            
+            try {
+                await fetch(`${API_URL}/courses/${id}`, { method: 'DELETE' });
+                showMessage('courses-message', 'Course deleted successfully!');
+                loadCourses();
+            } catch (error) {
+                showMessage('courses-message', 'Error deleting course', 'error');
+            }
+        }
+
+        function resetCourseForm() {
+            document.getElementById('courses-form').reset();
+            document.getElementById('course-id').value = '';
+        }
+
+        // ===== RECRUITERS FUNCTIONS =====
+        async function loadRecruiters() {
+            try {
+                const response = await fetch(`${API_URL}/recruiters`);
+                const recruiters = await response.json();
+                
+                let html = '<table class="data-table"><thead><tr><th>Order</th><th>Name</th><th>Logo</th><th>Actions</th></tr></thead><tbody>';
+                recruiters.forEach(item => {
+                    html += `<tr>
+                        <td>${item.order}</td>
+                        <td><strong>${item.name}</strong></td>
+                        <td><img src="${item.logo}" alt="${item.name}" style="max-height: 40px;"></td>
+                        <td class="action-buttons">
+                            <button class="btn btn-secondary" onclick='editRecruiter(${JSON.stringify(item)})'>Edit</button>
+                            <button class="btn btn-danger" onclick="deleteRecruiter('${item._id}')">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('recruiters-list').innerHTML = html;
+            } catch (error) {
+                document.getElementById('recruiters-list').innerHTML = '<p class="message error">Error loading recruiters</p>';
+            }
+        }
+
+        async function submitRecruiter(e) {
+            e.preventDefault();
+            const id = document.getElementById('recruiter-id').value;
+            const data = {
+                name: document.getElementById('recruiter-name').value,
+                logo: document.getElementById('recruiter-logo').value,
+                order: parseInt(document.getElementById('recruiter-order').value) || 0
+            };
+
+            try {
+                const url = id ? `${API_URL}/recruiters/${id}` : `${API_URL}/recruiters`;
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showMessage('recruiters-message', id ? 'Recruiter updated successfully!' : 'Recruiter added successfully!');
+                    resetRecruiterForm();
+                    loadRecruiters();
+                }
+            } catch (error) {
+                showMessage('recruiters-message', 'Error saving recruiter', 'error');
+            }
+        }
+
+        function editRecruiter(item) {
+            document.getElementById('recruiter-id').value = item._id;
+            document.getElementById('recruiter-name').value = item.name;
+            document.getElementById('recruiter-logo').value = item.logo;
+            document.getElementById('recruiter-order').value = item.order;
+            window.scrollTo(0, 0);
+        }
+
+        async function deleteRecruiter(id) {
+            if (!confirm('Are you sure you want to delete this recruiter?')) return;
+            
+            try {
+                await fetch(`${API_URL}/recruiters/${id}`, { method: 'DELETE' });
+                showMessage('recruiters-message', 'Recruiter deleted successfully!');
+                loadRecruiters();
+            } catch (error) {
+                showMessage('recruiters-message', 'Error deleting recruiter', 'error');
+            }
+        }
+
+        function resetRecruiterForm() {
+            document.getElementById('recruiters-form').reset();
+            document.getElementById('recruiter-id').value = '';
+        }
+
+        // ===== STATS FUNCTIONS =====
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_URL}/stats`);
+                const stats = await response.json();
+                
+                let html = '<table class="data-table"><thead><tr><th>Order</th><th>Label</th><th>Value</th><th>Icon</th><th>Actions</th></tr></thead><tbody>';
+                stats.forEach(item => {
+                    html += `<tr>
+                        <td>${item.order}</td>
+                        <td><strong>${item.label}</strong></td>
+                        <td>${item.value}</td>
+                        <td>${item.icon}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-secondary" onclick='editStat(${JSON.stringify(item)})'>Edit</button>
+                            <button class="btn btn-danger" onclick="deleteStat('${item._id}')">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('stats-list').innerHTML = html;
+            } catch (error) {
+                document.getElementById('stats-list').innerHTML = '<p class="message error">Error loading statistics</p>';
+            }
+        }
+
+        async function submitStat(e) {
+            e.preventDefault();
+            const id = document.getElementById('stat-id').value;
+            const data = {
+                label: document.getElementById('stat-label').value,
+                value: document.getElementById('stat-value').value,
+                icon: document.getElementById('stat-icon').value,
+                order: parseInt(document.getElementById('stat-order').value) || 0
+            };
+
+            try {
+                const url = id ? `${API_URL}/stats/${id}` : `${API_URL}/stats`;
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    showMessage('stats-message', id ? 'Statistic updated successfully!' : 'Statistic added successfully!');
+                    resetStatForm();
+                    loadStats();
+                }
+            } catch (error) {
+                showMessage('stats-message', 'Error saving statistic', 'error');
+            }
+        }
+
+        function editStat(item) {
+            document.getElementById('stat-id').value = item._id;
+            document.getElementById('stat-label').value = item.label;
+            document.getElementById('stat-value').value = item.value;
+            document.getElementById('stat-icon').value = item.icon;
+            document.getElementById('stat-order').value = item.order;
+            window.scrollTo(0, 0);
+        }
+
+        async function deleteStat(id) {
+            if (!confirm('Are you sure you want to delete this statistic?')) return;
+            
+            try {
+                await fetch(`${API_URL}/stats/${id}`, { method: 'DELETE' });
+                showMessage('stats-message', 'Statistic deleted successfully!');
+                loadStats();
+            } catch (error) {
+                showMessage('stats-message', 'Error deleting statistic', 'error');
+            }
+        }
+
+        function resetStatForm() {
+            document.getElementById('stats-form').reset();
+            document.getElementById('stat-id').value = '';
+        }
+
+        // ===== CONTACTS FUNCTIONS =====
+        async function loadContacts() {
+            try {
+                const response = await fetch(`${API_URL}/contact`);
+                const contacts = await response.json();
+                
+                let html = '<table class="data-table"><thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Actions</th></tr></thead><tbody>';
+                contacts.forEach(item => {
+                    const date = new Date(item.createdAt).toLocaleDateString();
+                    html += `<tr>
+                        <td>${date}</td>
+                        <td><strong>${item.name}</strong></td>
+                        <td>${item.email}</td>
+                        <td>${item.phone || 'N/A'}</td>
+                        <td>${item.message.substring(0, 50)}...</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteContact('${item._id}')">Delete</button>
+                        </td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                document.getElementById('contacts-list').innerHTML = html;
+            } catch (error) {
+                document.getElementById('contacts-list').innerHTML = '<p class="message error">Error loading contacts</p>';
+            }
+        }
+
+        async function deleteContact(id) {
+            if (!confirm('Are you sure you want to delete this contact submission?')) return;
+            
+            try {
+                await fetch(`${API_URL}/contact/${id}`, { method: 'DELETE' });
+                showMessage('contacts-message', 'Contact deleted successfully!');
+                loadContacts();
+            } catch (error) {
+                showMessage('contacts-message', 'Error deleting contact', 'error');
+            }
+        }
+
+        // Load initial data
+        loadNews();
+    </script>
+</body>
+</html>

@@ -1,10 +1,25 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import {
     Monitor, Cpu, Radio, Zap, Cog, Building2,
     GraduationCap, Briefcase, Brain, Database, ArrowRight
 } from 'lucide-react'
+
+// Map course names to department codes
+const departmentCodeMap = {
+    'CSE': 'CSE',
+    'CSE (AI)': 'CSEAI',
+    'CSE (AI & ML)': 'CSEAIML',
+    'Data Science': 'DS',
+    'ECE': 'ECE',
+    'EEE': 'EEE',
+    'Mechanical': 'MECH',
+    'Civil': 'CIVIL',
+    'MBA': 'MBA',
+    'MCA': 'MCA'
+}
 
 const courses = {
     ug: [
@@ -74,51 +89,54 @@ const courses = {
 }
 
 const CourseCard = ({ course, index, isInView }) => {
+    const departmentCode = departmentCodeMap[course.name] || course.name.toUpperCase().replace(/[^A-Z]/g, '')
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: index * 0.08, duration: 0.5 }}
         >
-            <motion.a
-                href={`#${course.name.toLowerCase().replace(/[^a-z]/g, '')}`}
-                whileHover={{ y: -6, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="block bg-white rounded-2xl p-6 border border-[var(--color-border)] hover:border-transparent hover:shadow-xl transition-all duration-300 group h-full"
-                style={{
-                    '--card-color': course.color,
-                }}
-            >
-                {/* Icon */}
-                <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
-                    style={{ backgroundColor: `${course.color}15` }}
+            <Link to={`/department/${departmentCode}`}>
+                <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="block bg-white rounded-2xl p-6 border border-[var(--color-border)] hover:border-transparent hover:shadow-xl transition-all duration-300 group h-full cursor-pointer"
+                    style={{
+                        '--card-color': course.color,
+                    }}
                 >
-                    <course.icon size={28} style={{ color: course.color }} />
-                </div>
+                    {/* Icon */}
+                    <div
+                        className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
+                        style={{ backgroundColor: `${course.color}15` }}
+                    >
+                        <course.icon size={28} style={{ color: course.color }} />
+                    </div>
 
-                {/* Name */}
-                <h3 className="text-lg font-semibold text-[var(--color-text-primary)] font-['Outfit'] mb-1 group-hover:text-[var(--color-primary)] transition-colors">
-                    {course.name}
-                </h3>
+                    {/* Name */}
+                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)] font-['Outfit'] mb-1 group-hover:text-[var(--color-primary)] transition-colors">
+                        {course.name}
+                    </h3>
 
-                {/* Full Name */}
-                <p className="text-sm text-[var(--color-text-secondary)] mb-4">
-                    {course.fullName}
-                </p>
+                    {/* Full Name */}
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-4">
+                        {course.fullName}
+                    </p>
 
-                {/* Learn More */}
-                <div className="flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: course.color }}>
-                    Learn More
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </div>
+                    {/* Learn More */}
+                    <div className="flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: course.color }}>
+                        Learn More
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
 
-                {/* Bottom accent */}
-                <div
-                    className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"
-                    style={{ backgroundColor: course.color }}
-                />
-            </motion.a>
+                    {/* Bottom accent */}
+                    <div
+                        className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"
+                        style={{ backgroundColor: course.color }}
+                    />
+                </motion.div>
+            </Link>
         </motion.div>
     )
 }
