@@ -29,6 +29,18 @@
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
   --transition-slow: 500ms ease;
+
+  /* Spacing Scale (8px base) */
+  --space-1: 0.5rem;   /* 8px */
+  --space-1-5: 0.75rem;/* 12px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 2.5rem;   /* 40px */
+  --space-6: 3rem;     /* 48px */
+
+  /* Accessibility */
+  --touch-target-min: 44px; /* WCAG recommended minimum */
 }
 
 /* Base Styles */
@@ -77,18 +89,18 @@ img {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 var(--space-2);
 }
 
 @media (min-width: 640px) {
   .container {
-    padding: 0 1.5rem;
+    padding: 0 var(--space-3);
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    padding: 0 2rem;
+    padding: 0 var(--space-3);
   }
 }
 
@@ -249,6 +261,17 @@ img {
 .delay-700 { animation-delay: 700ms; }
 .delay-800 { animation-delay: 800ms; }
 
+/* Section scroll offset for fixed header on department pages */
+.department-page section[id] {
+  scroll-margin-top: 8rem;
+}
+
+@media (min-width: 768px) {
+  .department-page section[id] {
+    scroll-margin-top: 10rem;
+  }
+}
+
 /* Image loading states */
 .image-loading {
   filter: blur(10px);
@@ -310,7 +333,7 @@ img {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: var(--space-1-5) var(--space-3);
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
   font-size: 0.95rem;
@@ -318,6 +341,7 @@ img {
   border: none;
   cursor: pointer;
   transition: all var(--transition-normal);
+  min-height: var(--touch-target-min);
 }
 
 .btn-primary {
@@ -370,12 +394,12 @@ img {
 
 /* Section spacing */
 .section {
-  padding: 4rem 0;
+  padding-block: var(--space-4);
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 6rem 0;
+    padding-block: var(--space-6);
   }
 }
 
@@ -398,13 +422,38 @@ img {
   text-align: center;
   color: var(--color-text-secondary);
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto var(--space-5);
 }
 
 /* Title underline decoration */
 .title-underline {
   position: relative;
   display: inline-block;
+}
+
+/* Typography spacing */
+p {
+  margin-bottom: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1.5em;
+}
+
+/* Utility: consistent gutters for grids */
+.gutter {
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .gutter {
+    gap: var(--space-4);
+  }
+}
+
+/* Utility: enforce touch target sizing */
+.touch-target {
+  min-height: var(--touch-target-min);
 }
 
 .title-underline::after {

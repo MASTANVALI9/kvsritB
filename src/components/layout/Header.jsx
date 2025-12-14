@@ -168,7 +168,7 @@ const Header = () => {
                                 >
                                     <Link
                                         to={item.href}
-                                        className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all ${activeDropdown === index
+                                        className={`touch-target flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all ${activeDropdown === index
                                             ? 'bg-[var(--color-primary)] text-white'
                                             : 'text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20'
                                             }`}
@@ -197,7 +197,8 @@ const Header = () => {
                                                         <Link
                                                             key={childIndex}
                                                             to={child.href}
-                                                            className="block px-4 py-2.5 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20 hover:text-[var(--color-primary)] transition-colors"
+                                                            onClick={() => setActiveDropdown(null)}
+                                                            className="touch-target block px-4 py-2.5 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20 hover:text-[var(--color-primary)] transition-colors"
                                                         >
                                                             {child.label}
                                                         </Link>
@@ -251,7 +252,7 @@ const Header = () => {
                                     <div key={index} className="border-b border-[var(--color-border)] last:border-0">
                                         <Link
                                             to={item.href}
-                                            className="block py-3 text-[var(--color-text-primary)] font-medium"
+                                            className="touch-target block py-3 text-[var(--color-text-primary)] font-medium"
                                             onClick={() => !item.children && setIsMobileMenuOpen(false)}
                                         >
                                             {item.label}
@@ -262,7 +263,7 @@ const Header = () => {
                                                     <Link
                                                         key={childIndex}
                                                         to={child.href}
-                                                        className="block py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
+                                                        className="touch-target block py-2 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
                                                         onClick={() => setIsMobileMenuOpen(false)}
                                                     >
                                                         {child.label}
