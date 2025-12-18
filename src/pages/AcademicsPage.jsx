@@ -74,13 +74,13 @@ const AcademicsPage = () => {
 
                 {/* Exam Cell */}
                 <motion.section id="exam" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8">
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
                             <FileText className="text-white" size={28} />
                         </div>
                         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">Examination Cell</h2>
                     </div>
-                    <div className="flex flex-wrap gap-3">{examServices.map((s, i) => (
+                    <div className="flex flex-wrap justify-center gap-3">{examServices.map((s, i) => (
                         <span key={i} className="bg-[var(--color-background)] px-4 py-2 rounded-lg text-sm flex items-center gap-2">
                             <CheckCircle size={14} className="text-[var(--color-success)]" />{s}
                         </span>
@@ -89,26 +89,26 @@ const AcademicsPage = () => {
 
                 {/* R&D */}
                 <motion.section id="rnd" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8">
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center">
                             <Lightbulb className="text-[var(--color-text-primary)]" size={28} />
                         </div>
                         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">R&D Cell</h2>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">{rndAreas.map((a, i) => (
+                    <div className="flex flex-wrap justify-center gap-3">{rndAreas.map((a, i) => (
                         <div key={i} className="bg-[var(--color-background)] rounded-xl p-4 text-center text-sm font-medium">{a}</div>
                     ))}</div>
                 </motion.section>
 
                 {/* IQAC */}
                 <motion.section id="iqac" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8">
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
                             <Award className="text-white" size={28} />
                         </div>
                         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">IQAC</h2>
                     </div>
-                    <div className="flex flex-wrap gap-3">{iqacItems.map((item, i) => (
+                    <div className="flex flex-wrap justify-center gap-3">{iqacItems.map((item, i) => (
                         <span key={i} className="bg-[var(--color-background)] px-4 py-2 rounded-lg text-sm flex items-center gap-2">
                             <Award size={14} className="text-[var(--color-primary)]" />{item}
                         </span>
@@ -117,13 +117,13 @@ const AcademicsPage = () => {
 
                 {/* Policies */}
                 <motion.section id="policies" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="bg-white rounded-2xl p-8 border border-[var(--color-border)]">
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center">
                             <Shield className="text-[var(--color-text-primary)]" size={28} />
                         </div>
                         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">Policies</h2>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <div className="flex flex-wrap justify-center gap-4">
                         {['Academic Integrity', 'Anti-Ragging', 'Grievance Redressal', 'IT Usage', 'Library', 'Examination'].map((p, i) => (
                             <div key={i} className="bg-[var(--color-background)] rounded-xl p-4 flex items-center gap-3">
                                 <Shield size={18} className="text-[var(--color-primary)]" />

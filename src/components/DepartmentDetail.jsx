@@ -895,13 +895,13 @@ const DepartmentDetail = () => {
                     )}
 
                     {/* Main Content */}
-                    <div className={`${hasStaticData ? 'lg:col-span-2' : 'lg:col-span-2'} space-y-8 md:space-y-10`}>
+                    <div className={`${hasStaticData ? 'lg:col-span-2' : 'lg:col-span-2'} flex flex-col gap-8 md:gap-10`}>
                         {/* About Section */}
                         <motion.section
                             id="about"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+                            className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow text-center"
                         >
                             <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-5 pb-4 border-b border-[var(--color-border)]">
                                 About the Department
@@ -918,9 +918,9 @@ const DepartmentDetail = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.05 }}
-                                className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+                                className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow text-center"
                             >
-                                <div className="flex items-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
+                                <div className="flex items-center justify-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center shadow-lg">
                                         <Eye className="text-white" size={28} />
                                     </div>
@@ -943,7 +943,7 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.1 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <div className="flex items-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
+                                <div className="flex items-center justify-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center shadow-lg">
                                         <Target className="text-[var(--color-text-primary)]" size={28} />
                                     </div>
@@ -953,7 +953,7 @@ const DepartmentDetail = () => {
                                 </div>
                                 <div className="space-y-4 md:space-y-5">
                                     {department.mission.map((item, index) => (
-                                        <div key={index} className="flex gap-4 items-start p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
+                                        <div key={index} className="flex flex-col items-center text-center gap-4 p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
                                             <span className="bg-[var(--color-primary)] text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm flex-shrink-0">
                                                 {item.id}
                                             </span>
@@ -973,17 +973,17 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.15 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <div className="flex items-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
+                                <div className="flex items-center justify-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center shadow-lg">
                                         <Lightbulb className="text-white" size={28} />
                                     </div>
-                                    <h2 className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">
+                                    <h2 className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit'] text-center">
                                         Programme Specific Outcomes (PSOs)
                                     </h2>
                                 </div>
                                 <div className="space-y-4 md:space-y-5">
                                     {department.psos.map((item, index) => (
-                                        <div key={index} className="flex gap-4 items-start p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
+                                        <div key={index} className="flex flex-col items-center text-center gap-4 p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
                                             <span className="bg-[var(--color-primary)] text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm flex-shrink-0">
                                                 {item.id}
                                             </span>
@@ -1003,18 +1003,18 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.2 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <div className="flex items-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
+                                <div className="flex items-center justify-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center shadow-lg">
                                         <GraduationCap className="text-[var(--color-text-primary)]" size={28} />
                                     </div>
-                                    <h2 className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit']">
+                                    <h2 className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit'] text-center">
                                         Program Educational Objectives (PEOs)
                                     </h2>
                                 </div>
-                                <p className="text-[var(--color-text-secondary)] mb-5 font-medium text-base md:text-lg bg-green-50 px-4 py-3 rounded-lg border-l-4 border-green-500">Graduates of the Program will have:</p>
+                                <p className="text-[var(--color-text-secondary)] mb-5 font-medium text-base md:text-lg bg-green-50 px-4 py-3 rounded-lg border-l-4 border-green-500 text-center">Graduates of the Program will have:</p>
                                 <div className="space-y-4 md:space-y-5">
                                     {department.peos.map((item, index) => (
-                                        <div key={index} className="flex gap-4 items-start p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
+                                        <div key={index} className="flex flex-col items-center text-center gap-4 p-4 md:p-5 bg-[var(--color-background)] rounded-xl hover:bg-opacity-80 transition-colors">
                                             <span className="bg-green-500 text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm flex-shrink-0">
                                                 {item.id}
                                             </span>
@@ -1034,7 +1034,7 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.25 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <div className="flex items-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
+                                <div className="flex items-center justify-center gap-4 md:gap-5 mb-5 pb-4 border-b border-[var(--color-border)]">
                                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center shadow-lg">
                                         <Award className="text-white" size={28} />
                                     </div>
@@ -1042,17 +1042,17 @@ const DepartmentDetail = () => {
                                         Program Outcomes (POs)
                                     </h2>
                                 </div>
-                                <p className="text-[var(--color-text-secondary)] mb-6 font-medium text-base md:text-lg bg-blue-50 px-4 py-3 rounded-lg border-l-4 border-[var(--color-primary)]">Engineering Graduates will be able to:</p>
+                                <p className="text-[var(--color-text-secondary)] mb-6 font-medium text-base md:text-lg bg-blue-50 px-4 py-3 rounded-lg border-l-4 border-[var(--color-primary)] text-center">Engineering Graduates will be able to:</p>
                                 <div className="space-y-5 md:space-y-6">
                                     {department.pos.map((item, index) => (
-                                        <div key={index} className="border-l-4 border-[var(--color-primary)] pl-5 md:pl-6 py-3 hover:bg-[var(--color-background)] rounded-r-xl transition-colors">
-                                            <div className="flex items-center gap-3 mb-2">
+                                        <div key={index} className="border-l-4 border-[var(--color-primary)] pl-5 md:pl-6 py-3 hover:bg-[var(--color-background)] rounded-r-xl transition-colors flex flex-col items-center text-center">
+                                            <div className="flex flex-col items-center gap-2 mb-2">
                                                 <span className="bg-[var(--color-primary)] text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center shadow-md">
                                                     {item.id}
                                                 </span>
                                                 <h3 className="font-semibold text-[var(--color-text-primary)] text-base md:text-lg">{item.title}</h3>
                                             </div>
-                                            <p className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed ml-11">{item.text}</p>
+                                            <p className="text-sm md:text-base text-[var(--color-text-secondary)] leading-relaxed">{item.text}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -1068,12 +1068,12 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.3 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6 pb-4 border-b border-[var(--color-border)]">
+                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6 pb-4 border-b border-[var(--color-border)] text-center">
                                     Infrastructure & Facilities
                                 </h2>
                                 <div className="grid md:grid-cols-2 gap-5 md:gap-6">
                                     {department.facilities.map((facility, index) => (
-                                        <div key={index} className="flex gap-4 p-5 bg-[var(--color-background)] rounded-xl hover:shadow-md transition-all hover:-translate-y-1">
+                                        <div key={index} className="flex flex-col items-center text-center gap-4 p-5 bg-[var(--color-background)] rounded-xl hover:shadow-md transition-all hover:-translate-y-1">
                                             <div className="w-12 h-12 rounded-xl bg-[var(--color-primary)] bg-opacity-10 flex items-center justify-center flex-shrink-0">
                                                 <Building className="text-[var(--color-primary)]" size={24} />
                                             </div>
@@ -1100,12 +1100,12 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.35 }}
                                 className="bg-white rounded-2xl p-6 md:p-8 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
                             >
-                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6 pb-4 border-b border-[var(--color-border)]">
+                                <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6 pb-4 border-b border-[var(--color-border)] text-center">
                                     Laboratories
                                 </h2>
                                 <div className="space-y-5 md:space-y-6">
                                     {department.labs.map((lab, index) => (
-                                        <div key={index} className="border-l-4 pl-5 md:pl-6 py-4 hover:bg-[var(--color-background)] rounded-r-xl transition-colors" style={{ borderColor: department.color }}>
+                                        <div key={index} className="border-l-4 pl-5 md:pl-6 py-4 hover:bg-[var(--color-background)] rounded-r-xl transition-colors flex flex-col items-center text-center" style={{ borderColor: department.color }}>
                                             <h3 className="font-semibold text-[var(--color-text-primary)] text-lg md:text-xl mb-2">
                                                 {lab.name}
                                             </h3>
@@ -1113,7 +1113,7 @@ const DepartmentDetail = () => {
                                                 {lab.description}
                                             </p>
                                             {lab.equipment && lab.equipment.length > 0 && (
-                                                <div className="flex flex-wrap gap-2 md:gap-3">
+                                                <div className="flex flex-wrap justify-center gap-2 md:gap-3">
                                                     {lab.equipment.map((eq, i) => (
                                                         <span
                                                             key={i}
@@ -1139,21 +1139,21 @@ const DepartmentDetail = () => {
                                 transition={{ delay: 0.4 }}
                                 className="bg-white rounded-2xl p-6 border border-[var(--color-border)]"
                             >
-                                <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6">
+                                <h2 className="text-2xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-6 text-center">
                                     Faculty Members
                                 </h2>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {faculty.map((member, index) => (
                                         <div
                                             key={index}
-                                            className="p-4 border border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] transition-colors"
+                                            className="p-4 border border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] transition-colors flex flex-col items-center text-center"
                                         >
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white font-semibold flex-shrink-0">
+                                            <div className="flex flex-col items-center gap-3 w-full">
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center text-white font-semibold flex-shrink-0 mx-auto">
                                                     {member.name.split(' ').map(n => n[0]).join('')}
                                                 </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <h3 className="font-semibold text-[var(--color-text-primary)] truncate">
+                                                <div className="flex-1 min-w-0 w-full">
+                                                    <h3 className="font-semibold text-[var(--color-text-primary)]">
                                                         {member.name}
                                                     </h3>
                                                     <p className="text-sm text-[var(--color-primary)] mb-1">
@@ -1162,7 +1162,7 @@ const DepartmentDetail = () => {
                                                     <p className="text-xs text-[var(--color-text-secondary)] mb-2">
                                                         {member.specialization}
                                                     </p>
-                                                    <div className="flex items-center gap-3 text-xs text-[var(--color-text-secondary)]">
+                                                    <div className="flex items-center justify-center gap-3 text-xs text-[var(--color-text-secondary)]">
                                                         <span>{member.experience} years exp.</span>
                                                         {member.publications > 0 && (
                                                             <span>• {member.publications} publications</span>
@@ -1178,19 +1178,19 @@ const DepartmentDetail = () => {
                     </div>
 
                     {/* Right Sidebar */}
-                    <div className="space-y-6 md:space-y-8">
+                    <div className="flex flex-col gap-6 md:gap-8">
                         {/* HOD Info */}
                         {department.hodName && (
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="bg-white rounded-2xl p-6 md:p-7 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+                                className="bg-white rounded-2xl p-6 md:p-7 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow text-center"
                             >
                                 <h3 className="text-lg md:text-xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-5 pb-3 border-b border-[var(--color-border)]">
                                     Head of Department
                                 </h3>
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-4 p-3 bg-[var(--color-background)] rounded-xl">
+                                <div className="space-y-4 flex flex-col items-center">
+                                    <div className="flex items-center gap-4 p-3 bg-[var(--color-background)] rounded-xl w-full justify-center">
                                         <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] bg-opacity-10 flex items-center justify-center">
                                             <User size={20} className="text-[var(--color-primary)]" />
                                         </div>
@@ -1199,7 +1199,7 @@ const DepartmentDetail = () => {
                                         </span>
                                     </div>
                                     {department.hodEmail && (
-                                        <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors">
+                                        <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors w-full justify-center">
                                             <Mail size={20} className="text-[var(--color-primary)]" />
                                             <a
                                                 href={`mailto:${department.hodEmail}`}
@@ -1210,7 +1210,7 @@ const DepartmentDetail = () => {
                                         </div>
                                     )}
                                     {department.hodPhone && (
-                                        <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors">
+                                        <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors w-full justify-center">
                                             <Phone size={20} className="text-[var(--color-primary)]" />
                                             <a
                                                 href={`tel:${department.hodPhone}`}
@@ -1229,13 +1229,13 @@ const DepartmentDetail = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="bg-white rounded-2xl p-6 md:p-7 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow"
+                            className="bg-white rounded-2xl p-6 md:p-7 border border-[var(--color-border)] shadow-sm hover:shadow-md transition-shadow text-center"
                         >
                             <h3 className="text-lg md:text-xl font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-5 pb-3 border-b border-[var(--color-border)]">
                                 Contact Information
                             </h3>
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors">
+                            <div className="space-y-4 flex flex-col items-center">
+                                <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors w-full justify-center">
                                     <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] bg-opacity-10 flex items-center justify-center">
                                         <Mail size={20} className="text-[var(--color-primary)]" />
                                     </div>
@@ -1247,7 +1247,7 @@ const DepartmentDetail = () => {
                                     </a>
                                 </div>
                                 {department.phone && (
-                                    <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors">
+                                    <div className="flex items-center gap-4 p-3 hover:bg-[var(--color-background)] rounded-xl transition-colors w-full justify-center">
                                         <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] bg-opacity-10 flex items-center justify-center">
                                             <Phone size={20} className="text-[var(--color-primary)]" />
                                         </div>
@@ -1269,14 +1269,14 @@ const DepartmentDetail = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-white rounded-2xl p-6 border border-[var(--color-border)]"
+                                className="bg-white rounded-2xl p-6 border border-[var(--color-border)] text-center"
                             >
-                                <h3 className="text-lg font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">
+                                <h3 className="text-lg font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4 border-b pb-2 border-[var(--color-border)]">
                                     Achievements
                                 </h3>
-                                <div className="space-y-3">
+                                <div className="space-y-3 flex flex-col items-center">
                                     {department.achievements.map((achievement, index) => (
-                                        <div key={index} className="flex gap-3">
+                                        <div key={index} className="flex gap-3 text-left bg-[var(--color-background)] p-3 rounded-lg w-full">
                                             <Award size={18} className="text-[var(--color-primary)] flex-shrink-0 mt-1" />
                                             <div>
                                                 <h4 className="font-semibold text-[var(--color-text-primary)] text-sm">
@@ -1298,14 +1298,14 @@ const DepartmentDetail = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.3 }}
-                                className="bg-white rounded-2xl p-6 border border-[var(--color-border)]"
+                                className="bg-white rounded-2xl p-6 border border-[var(--color-border)] text-center"
                             >
-                                <h3 className="text-lg font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4">
+                                <h3 className="text-lg font-bold text-[var(--color-text-primary)] font-['Outfit'] mb-4 border-b pb-2 border-[var(--color-border)]">
                                     Accreditations
                                 </h3>
-                                <div className="space-y-2">
+                                <div className="space-y-2 flex flex-col items-center">
                                     {department.accreditations.map((accreditation, index) => (
-                                        <div key={index} className="flex items-center gap-2">
+                                        <div key={index} className="flex items-center gap-2 bg-[var(--color-background)] p-2 rounded-lg w-full justify-center">
                                             <CheckCircle size={16} className="text-green-500" />
                                             <span className="text-sm text-[var(--color-text-primary)]">
                                                 {accreditation.name} ({accreditation.year})
@@ -1321,22 +1321,22 @@ const DepartmentDetail = () => {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-2xl p-6 md:p-7 text-white shadow-lg hover:shadow-xl transition-shadow"
+                            className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-2xl p-6 md:p-7 text-white shadow-lg hover:shadow-xl transition-shadow text-center"
                         >
                             <h3 className="text-lg md:text-xl font-bold font-['Outfit'] mb-5 pb-3 border-b border-white/20">
                                 Program Details
                             </h3>
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-4 p-3 bg-white/10 rounded-xl">
+                            <div className="space-y-4 flex flex-col items-center">
+                                <div className="flex items-center gap-4 p-3 bg-white/10 rounded-xl w-full justify-center hook-centered">
                                     <BookOpen size={22} />
-                                    <div>
+                                    <div className="text-left">
                                         <span className="text-white/70 text-xs block">Program Type</span>
                                         <span className="text-base font-semibold">{department.programType}</span>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-4 p-3 bg-white/10 rounded-xl">
+                                <div className="flex items-center gap-4 p-3 bg-white/10 rounded-xl w-full justify-center hook-centered">
                                     <Calendar size={22} />
-                                    <div>
+                                    <div className="text-left">
                                         <span className="text-white/70 text-xs block">Duration</span>
                                         <span className="text-base font-semibold">{department.duration}</span>
                                     </div>

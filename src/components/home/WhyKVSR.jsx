@@ -66,14 +66,14 @@ const WhyKVSR = () => {
                                 className="h-full bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden group hover:shadow-xl transition-shadow duration-300"
                             >
                                 {/* Icon Header */}
-                                <div className={`p-6 bg-gradient-to-r ${feature.gradient}`}>
+                                <div className={`p-6 bg-gradient-to-r ${feature.gradient} flex justify-center`}>
                                     <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                         <feature.icon size={32} className="text-white" />
                                     </div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6">
+                                <div className="p-6 text-center">
                                     <h3 className="text-xl font-semibold mb-4 text-[var(--color-text-primary)] font-['Outfit'] group-hover:text-[var(--color-primary)] transition-colors">
                                         {feature.title}
                                     </h3>

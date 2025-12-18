@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUp } from 'lucide-react'
 import { motion } from 'framer-motion'
+import './Footer.css'
 
 const quickLinks = [
     { label: 'About Us', href: '#about' },
@@ -25,45 +26,47 @@ const Footer = () => {
     }
 
     return (
-        <footer className="bg-gradient-to-b from-[var(--color-primary-dark)] to-[#3D2914] text-white">
+        <footer className="footer-section">
             {/* Main Footer */}
-            <div className="container mx-auto px-4 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="footer-container">
+                <div className="footer-grid">
                     {/* College Info */}
                     <div className="lg:col-span-1">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center">
-                                <span className="text-[var(--color-text-primary)] font-bold text-xl font-['Outfit']">K</span>
+                        <div className="logo-container">
+                            <div className="logo-circle">
+                                <span className="logo-initial">K</span>
                             </div>
-                            <div>
-                                <h3 className="text-lg font-bold font-['Outfit']">Dr. K.V. Subba Reddy</h3>
-                                <p className="text-sm text-[var(--color-primary-light)]">Institute of Technology</p>
+                            <div className="college-name-wrapper">
+                                <h3 className="college-name">
+                                    Dr. K.V. Subba Reddy<br />
+                                    Institute of Technology
+                                </h3>
                             </div>
                         </div>
-                        <p className="text-sm text-gray-300 mb-6 leading-relaxed">
+                        <p className="college-description">
                             An intellectual destination that draws inspired scholars, keeping Dr.KVSRIT at the nexus of ideas that challenge and change the world.
                         </p>
-                        <div className="flex items-center gap-3 px-4 py-2 bg-white/10 rounded-lg inline-block">
-                            <span className="text-sm font-semibold">Affiliated to JNTUA</span>
-                            <span className="text-[var(--color-accent)]">|</span>
-                            <span className="text-sm font-semibold">NAAC A+</span>
+                        <div className="accreditations">
+                            <span className="accreditation-text">Affiliated to JNTUA</span>
+                            <span className="accreditation-divider">|</span>
+                            <span className="accreditation-text">NAAC A+</span>
                         </div>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-['Outfit'] relative">
+                        <h4 className="footer-heading">
                             Quick Links
-                            <span className="absolute bottom-[-8px] left-0 w-12 h-0.5 bg-[var(--color-accent)]"></span>
+                            <span className="heading-underline"></span>
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="footer-links-list">
                             {quickLinks.map((link, index) => (
-                                <li key={index}>
+                                <li key={index} className="footer-link-item">
                                     <a
                                         href={link.href}
-                                        className="text-gray-300 hover:text-[var(--color-accent)] transition-colors text-sm flex items-center gap-2 group"
+                                        className="footer-link group"
                                     >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary-light)] group-hover:bg-[var(--color-accent)] transition-colors"></span>
+                                        <span className="link-dot"></span>
                                         {link.label}
                                     </a>
                                 </li>
@@ -73,18 +76,18 @@ const Footer = () => {
 
                     {/* Resources */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-['Outfit'] relative">
+                        <h4 className="footer-heading">
                             Resources
-                            <span className="absolute bottom-[-8px] left-0 w-12 h-0.5 bg-[var(--color-accent)]"></span>
+                            <span className="heading-underline"></span>
                         </h4>
-                        <ul className="space-y-3">
+                        <ul className="footer-links-list">
                             {resources.map((link, index) => (
-                                <li key={index}>
+                                <li key={index} className="footer-link-item">
                                     <a
                                         href={link.href}
-                                        className="text-gray-300 hover:text-[var(--color-accent)] transition-colors text-sm flex items-center gap-2 group"
+                                        className="footer-link group"
                                     >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary-light)] group-hover:bg-[var(--color-accent)] transition-colors"></span>
+                                        <span className="link-dot"></span>
                                         {link.label}
                                     </a>
                                 </li>
@@ -94,46 +97,46 @@ const Footer = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-['Outfit'] relative">
+                        <h4 className="footer-heading">
                             Contact Us
-                            <span className="absolute bottom-[-8px] left-0 w-12 h-0.5 bg-[var(--color-accent)]"></span>
+                            <span className="heading-underline"></span>
                         </h4>
-                        <ul className="space-y-4">
-                            <li className="flex items-start gap-3">
-                                <MapPin size={18} className="text-[var(--color-accent)] flex-shrink-0 mt-1" />
-                                <span className="text-sm text-gray-300">
+                        <ul className="contact-list">
+                            <li className="contact-item">
+                                <MapPin size={18} className="contact-icon mt-1" />
+                                <span className="contact-text">
                                     Dr. K.V. Subba Reddy Institute of Technology,<br />
                                     Kurnool, Andhra Pradesh, India
                                 </span>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Phone size={18} className="text-[var(--color-accent)] flex-shrink-0" />
-                                <div>
-                                    <a href="tel:9704333789" className="text-sm text-gray-300 hover:text-[var(--color-accent)] transition-colors block">
+                            <li className="contact-item center-align">
+                                <Phone size={18} className="contact-icon" />
+                                <div className="contact-phone-block">
+                                    <a href="tel:9704333789" className="contact-link-text">
                                         9704333789
                                     </a>
-                                    <a href="tel:9440006717" className="text-sm text-gray-300 hover:text-[var(--color-accent)] transition-colors block">
+                                    <a href="tel:9440006717" className="contact-link-text">
                                         9440006717
                                     </a>
                                 </div>
                             </li>
-                            <li className="flex items-center gap-3">
-                                <Mail size={18} className="text-[var(--color-accent)] flex-shrink-0" />
-                                <a href="mailto:drkvsr.principal@gmail.com" className="text-sm text-gray-300 hover:text-[var(--color-accent)] transition-colors">
+                            <li className="contact-item center-align">
+                                <Mail size={18} className="contact-icon" />
+                                <a href="mailto:drkvsr.principal@gmail.com" className="contact-link-text">
                                     drkvsr.principal@gmail.com
                                 </a>
                             </li>
                         </ul>
 
                         {/* Social Links */}
-                        <div className="flex items-center gap-3 mt-6">
+                        <div className="social-links">
                             {[Facebook, Twitter, Instagram, Linkedin, Youtube].map((Icon, index) => (
                                 <a
                                     key={index}
                                     href="#"
-                                    className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-accent)] transition-colors group"
+                                    className="social-icon-link group"
                                 >
-                                    <Icon size={16} className="text-white group-hover:text-[var(--color-text-primary)]" />
+                                    <Icon size={16} className="social-icon" />
                                 </a>
                             ))}
                         </div>
@@ -142,13 +145,13 @@ const Footer = () => {
             </div>
 
             {/* Bottom Bar */}
-            <div className="border-t border-white/10">
-                <div className="container mx-auto px-4 py-6">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className="text-sm text-gray-400 text-center md:text-left">
+            <div className="footer-bottom">
+                <div className="footer-bottom-container">
+                    <div className="footer-bottom-flex">
+                        <p className="copyright-text">
                             © {new Date().getFullYear()} Dr. K.V. Subba Reddy Institute of Technology. All Rights Reserved.
                         </p>
-                        <p className="text-sm text-gray-400">
+                        <p className="maintained-by-text">
                             Maintained By Dr. G. Sunkanna
                         </p>
                     </div>
@@ -158,7 +161,7 @@ const Footer = () => {
             {/* Scroll to Top Button */}
             <motion.button
                 onClick={scrollToTop}
-                className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-[var(--color-primary)] text-white shadow-lg flex items-center justify-center hover:bg-[var(--color-primary-dark)] transition-colors z-40"
+                className="scroll-top-btn"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 initial={{ opacity: 0, y: 20 }}

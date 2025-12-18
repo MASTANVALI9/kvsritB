@@ -113,7 +113,7 @@ const AboutPage = () => {
                     transition={{ delay: 0.1 }}
                     className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8"
                 >
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
                             <Building className="text-white" size={28} />
                         </div>
@@ -121,7 +121,7 @@ const AboutPage = () => {
                             {sections.about.title}
                         </h2>
                     </div>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed text-lg">
+                    <p className="text-[var(--color-text-secondary)] leading-relaxed text-lg text-center">
                         {sections.about.content}
                     </p>
                 </motion.section>
@@ -134,7 +134,7 @@ const AboutPage = () => {
                     transition={{ delay: 0.2 }}
                     className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8"
                 >
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-light)] flex items-center justify-center">
                             <Target className="text-[var(--color-text-primary)]" size={28} />
                         </div>
@@ -144,18 +144,18 @@ const AboutPage = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-[var(--color-background)] rounded-xl p-6">
-                            <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3 flex items-center gap-2">
+                            <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3 flex items-center justify-center gap-2">
                                 <Star size={20} /> Vision
                             </h3>
-                            <p className="text-[var(--color-text-secondary)]">{sections.vision.vision}</p>
+                            <p className="text-[var(--color-text-secondary)] text-center">{sections.vision.vision}</p>
                         </div>
                         <div className="bg-[var(--color-background)] rounded-xl p-6">
-                            <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3 flex items-center gap-2">
+                            <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3 flex items-center justify-center gap-2">
                                 <Globe size={20} /> Mission
                             </h3>
                             <ul className="space-y-2">
                                 {sections.vision.mission.map((item, index) => (
-                                    <li key={index} className="flex items-start gap-2 text-[var(--color-text-secondary)]">
+                                    <li key={index} className="flex items-start justify-center gap-2 text-[var(--color-text-secondary)]">
                                         <CheckCircle size={16} className="text-[var(--color-success)] mt-1 flex-shrink-0" />
                                         <span>{item}</span>
                                     </li>
