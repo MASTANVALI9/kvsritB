@@ -103,7 +103,7 @@ const AdmissionsPage = () => {
                     transition={{ delay: 0.1 }}
                     className="bg-white rounded-2xl p-8 border border-[var(--color-border)] mb-8"
                 >
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
                             <FileText className="text-white" size={28} />
                         </div>
@@ -118,7 +118,7 @@ const AdmissionsPage = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 + index * 0.05 }}
-                                className="bg-[var(--color-background)] rounded-xl p-5 relative"
+                                className="bg-[var(--color-background)] rounded-xl p-5 relative flex flex-col items-center text-center"
                             >
                                 <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold mb-3">
                                     {item.step}
@@ -273,7 +273,7 @@ const AdmissionsPage = () => {
                     transition={{ delay: 0.5 }}
                     className="bg-white rounded-2xl p-8 border border-[var(--color-border)]"
                 >
-                    <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] flex items-center justify-center">
                             <Award className="text-white" size={28} />
                         </div>
@@ -283,7 +283,7 @@ const AdmissionsPage = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                         {scholarships.map((scholarship, index) => (
-                            <div key={index} className="bg-[var(--color-background)] rounded-xl p-6">
+                            <div key={index} className="bg-[var(--color-background)] rounded-xl p-6 flex flex-col items-center text-center">
                                 <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">{scholarship.name}</h4>
                                 <p className="text-sm text-[var(--color-text-secondary)] mb-3">{scholarship.description}</p>
                                 <span className="inline-block px-3 py-1 bg-[var(--color-accent-light)] text-[var(--color-text-primary)] text-sm rounded-full font-medium">

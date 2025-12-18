@@ -53,6 +53,7 @@ const navItems = [
             { label: 'Electrical & Electronics', href: '/department/EEE' },
             { label: 'Mechanical Engineering', href: '/department/MECH' },
             { label: 'Civil Engineering', href: '/department/CIVIL' },
+
             { label: 'MBA', href: '/department/MBA' },
             { label: 'MCA', href: '/department/MCA' },
         ],
@@ -87,6 +88,7 @@ const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState(null)
+    const location = useLocation()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -105,6 +107,22 @@ const Header = () => {
         setActiveDropdown(null)
     }
 
+    // Helper to determine if we should use Link or a tag
+    const NavLink = ({ href, children, className, onClick }) => {
+        if (href.startsWith('/department/')) {
+            return (
+                <Link to={href} className={className} onClick={onClick}>
+                    {children}
+                </Link>
+            )
+        }
+        return (
+            <a href={href} className={className} onClick={onClick}>
+                {children}
+            </a>
+        )
+    }
+
     return (
         <header className="fixed top-0 left-0 right-0 z-50">
             {/* Top Bar */}
@@ -121,11 +139,11 @@ const Header = () => {
                         </a>
                     </div>
                     <div className="flex items-center gap-4">
-                        <a href="#alumni" className="hover:text-[var(--color-accent-light)] transition-colors">Alumni</a>
+                        <a href="/#alumni" className="hover:text-[var(--color-accent-light)] transition-colors">Alumni</a>
                         <span className="text-[var(--color-primary-light)]">|</span>
-                        <a href="#grievance" className="hover:text-[var(--color-accent-light)] transition-colors">Grievance Cell</a>
+                        <a href="/#grievance" className="hover:text-[var(--color-accent-light)] transition-colors">Grievance Cell</a>
                         <span className="text-[var(--color-primary-light)]">|</span>
-                        <a href="#mandatory" className="hover:text-[var(--color-accent-light)] transition-colors">Mandatory Disclosures</a>
+                        <a href="/#mandatory" className="hover:text-[var(--color-accent-light)] transition-colors">Mandatory Disclosures</a>
                     </div>
                 </div>
             </div>
@@ -168,44 +186,46 @@ const Header = () => {
                                 >
                                     <Link
                                         to={item.href}
-                                        className={`touch-target flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all ${activeDropdown === index
-                                            ? 'bg-[var(--color-primary)] text-white'
+                                        className={`touch-target flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all relative ${activeDropdown === index
+                                            ? 'bg-[var(--color-primary)] !text-white'
                                             : 'text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20'
                                             }`}
                                     >
-                                        {item.label}
+                                        <span className="relative z-10">{item.label}</span>
                                         {item.children && (
                                             <ChevronDown
                                                 size={14}
-                                                className={`transition-transform ${activeDropdown === index ? 'rotate-180' : ''}`}
+                                                className={`transition-transform relative z-10 ${activeDropdown === index ? 'rotate-180' : ''}`}
                                             />
                                         )}
                                     </Link>
 
                                     {/* Dropdown */}
                                     <AnimatePresence>
-                                        {item.children && activeDropdown === index && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: 10 }}
-                                                transition={{ duration: 0.2 }}
-                                                className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl border border-[var(--color-border)] overflow-hidden z-50"
-                                            >
-                                                <div className="py-2">
-                                                    {item.children.map((child, childIndex) => (
-                                                        <Link
-                                                            key={childIndex}
-                                                            to={child.href}
-                                                            onClick={() => setActiveDropdown(null)}
-                                                            className="touch-target block px-4 py-2.5 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20 hover:text-[var(--color-primary)] transition-colors"
-                                                        >
-                                                            {child.label}
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        )}
+                                        {
+                                            item.children && activeDropdown === index && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 10 }}
+                                                    transition={{ duration: 0.2 }}
+                                                    className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl border border-[var(--color-border)] overflow-hidden z-50"
+                                                >
+                                                    <div className="py-2">
+                                                        {item.children.map((child, childIndex) => (
+                                                            <Link
+                                                                key={childIndex}
+                                                                to={child.href}
+                                                                onClick={() => setActiveDropdown(null)}
+                                                                className="touch-target block px-4 py-2.5 text-sm text-[var(--color-text-primary)] hover:bg-[var(--color-primary-light)]/20 hover:text-[var(--color-primary)] transition-colors"
+                                                            >
+                                                                {child.label}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </motion.div>
+                                            )
+                                        }
                                     </AnimatePresence>
                                 </div>
                             ))}
@@ -228,11 +248,12 @@ const Header = () => {
                                 className="lg:hidden p-2 rounded-lg hover:bg-[var(--color-primary-light)]/20 transition-colors"
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             >
-                                {isMobileMenuOpen ? (
-                                    <X size={24} className="text-[var(--color-text-primary)]" />
-                                ) : (
-                                    <Menu size={24} className="text-[var(--color-text-primary)]" />
-                                )}
+                                {
+                                    isMobileMenuOpen ? (
+                                        <X size={24} className="text-[var(--color-text-primary)]" />
+                                    ) : (
+                                        <Menu size={24} className="text-[var(--color-text-primary)]" />
+                                    )}
                             </button>
                         </div>
                     </div>
@@ -268,7 +289,8 @@ const Header = () => {
                                                     >
                                                         {child.label}
                                                     </Link>
-                                                ))}
+                                                ))
+                                                }
                                             </div>
                                         )}
                                     </div>
@@ -283,3 +305,4 @@ const Header = () => {
 }
 
 export default Header
+
